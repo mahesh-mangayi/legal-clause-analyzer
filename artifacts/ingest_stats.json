@@ -1,0 +1,24 @@
+{
+  "json_files_seen": 10620,
+  "positives": 35830,
+  "skipped": 346,
+  "rows": 143320,
+  "contracts": 1118,
+  "by_split": {
+    "train": 114424,
+    "dev": 15552,
+    "test": 13344
+  },
+  "by_kind_pos": {
+    "in_text": 18335,
+    "legal": 17495
+  },
+  "by_type_pos": {
+    "Ambiguity": 7393,
+    "Inconsistency": 7668,
+    "MisalignedTerminology": 8037,
+    "Omission": 6790,
+    "StructuralFlaws": 5942
+  },
+  "out_path": "artifacts/pairs.jsonl"
+}
