@@ -22,11 +22,25 @@ export default function UploadPage() {
   const [stage, setStage] = useState(0);
   const [timings, setTimings] = useState<Record<string, number> | null>(null);
   const [loadError, setLoadError] = useState<string | null>(null);
+  const [samplesLoading, setSamplesLoading] = useState(true);
 
   useEffect(() => {
+    let cancelled = false;
     fetchSamples()
-      .then((d) => setSamples(d.samples || []))
-      .catch(() => setLoadError("Could not load CLAUSE samples. Is the API running on port 8765?"));
+      .then((d) => {
+        if (!cancelled) setSamples(d.samples || []);
+      })
+      .catch(() => {
+        if (!cancelled) {
+          setLoadError("Could not load CLAUSE samples. Is the API running on port 8765?");
+        }
+      })
+      .finally(() => {
+        if (!cancelled) setSamplesLoading(false);
+      });
+    return () => {
+      cancelled = true;
+    };
   }, []);
 
   async function run() {
@@ -113,8 +127,11 @@ export default function UploadPage() {
             CLAUSE samples
           </h2>
           <ul className="mt-3 space-y-2">
-            {samples.length === 0 && !loadError ? (
+            {samplesLoading ? (
               <li className="text-sm text-[var(--muted)]">Loading samples…</li>
+            ) : null}
+            {!samplesLoading && samples.length === 0 && !loadError ? (
+              <li className="text-sm text-[var(--muted)]">No samples found. Check artifacts/demo_samples.json.</li>
             ) : null}
             {samples.map((s) => (
               <li key={s.id}>
