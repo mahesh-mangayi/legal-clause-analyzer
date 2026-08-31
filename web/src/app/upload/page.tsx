@@ -1,9 +1,10 @@
 "use client";
 
 import { Nav } from "@/components/nav";
-import { analyzeContract, fetchSamples, type Sample } from "@/lib/api";
+import { analyzeContract, type Sample } from "@/lib/api";
+import bundled from "@/data/samples.json";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 const STAGES = [
   { key: "segment_ms", label: "Segment clauses" },
@@ -12,36 +13,17 @@ const STAGES = [
   { key: "total_ms", label: "Total" },
 ];
 
+const BUNDLED_SAMPLES = (bundled as { samples: Sample[] }).samples;
+
 export default function UploadPage() {
   const router = useRouter();
-  const [samples, setSamples] = useState<Sample[]>([]);
+  const samples = BUNDLED_SAMPLES;
   const [text, setText] = useState("");
   const [title, setTitle] = useState("Pasted contract");
   const [error, setError] = useState<string | null>(null);
   const [running, setRunning] = useState(false);
   const [stage, setStage] = useState(0);
   const [timings, setTimings] = useState<Record<string, number> | null>(null);
-  const [loadError, setLoadError] = useState<string | null>(null);
-  const [samplesLoading, setSamplesLoading] = useState(true);
-
-  useEffect(() => {
-    let cancelled = false;
-    fetchSamples()
-      .then((d) => {
-        if (!cancelled) setSamples(d.samples || []);
-      })
-      .catch(() => {
-        if (!cancelled) {
-          setLoadError("Could not load CLAUSE samples. Is the API running on port 8765?");
-        }
-      })
-      .finally(() => {
-        if (!cancelled) setSamplesLoading(false);
-      });
-    return () => {
-      cancelled = true;
-    };
-  }, []);
 
   async function run() {
     setError(null);
@@ -80,7 +62,6 @@ export default function UploadPage() {
           <p className="mt-2 text-sm text-[var(--muted)]">
             Processing shows real pipeline stages — segment, candidate pairs, score — not a spinner.
           </p>
-          {loadError ? <p className="mt-4 text-sm text-[var(--accent)]">{loadError}</p> : null}
           <label className="mt-6 block text-sm font-medium">Contract text</label>
           <textarea
             value={text}
@@ -127,12 +108,6 @@ export default function UploadPage() {
             CLAUSE samples
           </h2>
           <ul className="mt-3 space-y-2">
-            {samplesLoading ? (
-              <li className="text-sm text-[var(--muted)]">Loading samples…</li>
-            ) : null}
-            {!samplesLoading && samples.length === 0 && !loadError ? (
-              <li className="text-sm text-[var(--muted)]">No samples found. Check artifacts/demo_samples.json.</li>
-            ) : null}
             {samples.map((s) => (
               <li key={s.id}>
                 <button
