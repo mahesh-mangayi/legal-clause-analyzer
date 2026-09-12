@@ -12,11 +12,12 @@ data/clause-legal/
 data/raw/
 artifacts/pairs.jsonl
 artifacts/pairs_colab.jsonl
+artifacts/pairs_colab_full.jsonl
+artifacts/pairs_colab_full.jsonl.gz
 artifacts/legalbert-dca/
 artifacts/llm_testset.jsonl
 artifacts/llm_testset_full.jsonl
 artifacts/llm_testset_long.jsonl
-
 
 .DS_Store
 .env
