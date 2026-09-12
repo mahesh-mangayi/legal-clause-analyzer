@@ -100,6 +100,18 @@ To fine-tune or re-train Legal-BERT on a free **GPU T4** instance:
 
 ---
 
+## ✅ Completion Checklist & Optional Next Steps
+
+- [x] **Full Data Ingestion Pipeline**: Ingested 143k pairs across 1,118 contracts.
+- [x] **Batched Transformer Inference**: Refactored `PairAuditor` with PyTorch batching.
+- [x] **FastAPI & Next.js Stack**: Backend API on `:8765` and Next.js frontend with Conflict Arc Explorer on `:3847`.
+- [x] **Colab Early Stopping Notebook**: Configured `notebooks/train_legalbert_colab.ipynb` with `patience=3`.
+- [ ] **Optional GPU Fine-Tuning**: Run `train_legalbert_colab.ipynb` on GPU T4 with `pairs_colab_full.jsonl.gz`.
+- [ ] **Optional Zero-Shot LLM Evaluation**: Provide `NVIDIA_API_KEY` to evaluate `gpt-oss-120b` or Qwen on `llm_testset_long.jsonl`.
+- [ ] **Production Deployment**: Deploy Next.js to Vercel and FastAPI service to Render / AWS / Modal.
+
+---
+
 ## 📜 Citation
 
 Roy Choudhury et al. *Better Call CLAUSE*, EACL 2026 Findings. Dataset CC BY 4.0 via CUAD / ContractNLI.
