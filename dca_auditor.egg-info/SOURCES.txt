@@ -1,9 +1,11 @@
 README.md
 setup.py
 auditor/__init__.py
+auditor/align.py
 auditor/api.py
 auditor/infer.py
 auditor/ingest.py
+auditor/llm_nvidia.py
 auditor/schema.py
 auditor/segment.py
 auditor/train_baseline.py

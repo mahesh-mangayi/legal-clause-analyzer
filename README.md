@@ -113,5 +113,3 @@ To fine-tune or re-train Legal-BERT on a free **GPU T4** instance:
 ---
 
 ## 📜 Citation
-
-Roy Choudhury et al. *Better Call CLAUSE*, EACL 2026 Findings. Dataset CC BY 4.0 via CUAD / ContractNLI.
