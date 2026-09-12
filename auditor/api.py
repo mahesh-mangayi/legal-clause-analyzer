@@ -8,12 +8,11 @@ from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field
 
-from auditor.infer import PairAuditor
-
 ROOT = Path(__file__).resolve().parents[1]
 MODEL_PATH = ROOT / "artifacts" / "tfidf_logreg.joblib"
 SAMPLES_PATH = ROOT / "artifacts" / "demo_samples.json"
 METRICS_PATH = ROOT / "artifacts" / "metrics.json"
+LEGALBERT_METRICS = ROOT / "artifacts" / "metrics_legalbert.json"
 INGEST_STATS = ROOT / "artifacts" / "ingest_stats.json"
 
 app = FastAPI(title="Distant Contradiction Auditor", version="0.1.0")
@@ -24,15 +23,19 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-_auditor: PairAuditor | None = None
+DOC_BENCHMARK = ROOT / "artifacts" / "doc_benchmark.json"
+
+_auditor = None
 
 
-def get_auditor() -> PairAuditor:
+def get_auditor():
     global _auditor
     if _auditor is None:
         if not MODEL_PATH.exists():
             raise HTTPException(503, "Model not trained. Run scripts/train_baseline.py")
-        _auditor = PairAuditor(MODEL_PATH)
+        from auditor.infer import load_auditor
+
+        _auditor = load_auditor(ROOT)
     return _auditor
 
 
@@ -50,7 +53,12 @@ def health():
 def meta():
     stats = json.loads(INGEST_STATS.read_text()) if INGEST_STATS.exists() else {}
     metrics = json.loads(METRICS_PATH.read_text()) if METRICS_PATH.exists() else {}
-    return {"ingest": stats, "metrics": metrics, "backend": "tfidf_logreg_pair"}
+    if LEGALBERT_METRICS.exists():
+        metrics["legalbert"] = json.loads(LEGALBERT_METRICS.read_text(encoding="utf-8"))
+    if DOC_BENCHMARK.exists():
+        metrics["doc_benchmark"] = json.loads(DOC_BENCHMARK.read_text(encoding="utf-8"))
+    auditor = get_auditor()
+    return {"ingest": stats, "metrics": metrics, "backend": auditor.backend}
 
 
 @app.get("/samples")

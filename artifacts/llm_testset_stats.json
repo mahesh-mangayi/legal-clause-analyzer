@@ -1,0 +1,22 @@
+{
+  "source_pairs": "artifacts\\pairs_colab.jsonl",
+  "seed": 13,
+  "n_test_contracts_available": 106,
+  "n_docs": 106,
+  "n_gold_pairs": 2000,
+  "by_corpus": {
+    "cuad": 61,
+    "nli": 45
+  },
+  "by_kind": {
+    "in_text": 63,
+    "legal": 43
+  },
+  "by_gap_bin": {
+    "far": 8,
+    "nearby": 94,
+    "same_section": 1,
+    "unknown": 3
+  },
+  "note": "Test contract_ids only. Document text is reconstructed from gold spans (full BCC files if pairs.jsonl came from ingest). Do not resample after LLM runs."
+}

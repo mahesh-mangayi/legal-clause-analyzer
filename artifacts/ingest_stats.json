@@ -20,5 +20,5 @@
     "Omission": 6790,
     "StructuralFlaws": 5942
   },
-  "out_path": "artifacts/pairs.jsonl"
+  "out_path": "artifacts\\pairs.jsonl"
 }

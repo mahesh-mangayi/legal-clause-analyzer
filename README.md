@@ -9,7 +9,7 @@ BCC labels **pairs**, not 3-hop graphs. The model scores clause pairs. Structure
 | Path | Role |
 |---|---|
 | `auditor/` | Ingest, segmenter, TF–IDF pair scorer, FastAPI |
-| `scripts/` | `ingest_bcc.py`, `train_baseline.py`, Colab subset, demo samples |
+| `scripts/` | `ingest_bcc.py`, `train_baseline.py`, Colab subset, LLM test slice, demo samples |
 | `notebooks/train_legalbert_colab.ipynb` | Legal-BERT fine-tune on a **T4** |
 | `web/` | Five-page demo |
 | `artifacts/` | Metrics, CPU model, `pairs_colab.jsonl.gz` for Drive |
@@ -23,14 +23,15 @@ Do not commit the full CLAUSE clone (`data/clause-legal/`) or the 257MB `pairs.j
 git clone --depth 1 https://github.com/clause-legal/clause-legal.github.io.git data/clause-legal
 
 python3 -m venv .venv
-source .venv/bin/activate
+source .venv/bin/activate   # Windows: .venv\Scripts\Activate.ps1
 pip install -r requirements.txt
 pip install -e .
 
-PYTHONPATH=. python scripts/ingest_bcc.py          # artifacts/pairs.jsonl
-PYTHONPATH=. python scripts/make_colab_subset.py
-PYTHONPATH=. python scripts/export_demo_samples.py
-PYTHONPATH=. python scripts/train_baseline.py      # artifacts/tfidf_logreg.joblib
+PYTHONPATH=. python scripts/ingest_bcc.py
+PYTHONPATH=. python scripts/train_baseline.py
+PYTHONPATH=. python scripts/make_llm_testset.py
+PYTHONPATH=. python scripts/attach_full_contracts.py
+PYTHONPATH=. python scripts/eval_documents.py --docs artifacts/llm_testset_long.jsonl
 
 PYTHONPATH=. uvicorn auditor.api:app --host 127.0.0.1 --port 8765
 ```
@@ -50,6 +51,8 @@ Pages: Dashboard, Upload (CLAUSE samples + pipeline timings), Results, Conflict 
 1. Upload `artifacts/pairs_colab.jsonl.gz` to `Drive/MyDrive/dca/`.
 2. Open `notebooks/train_legalbert_colab.ipynb`, runtime GPU T4.
 3. Download `legalbert-dca/` + `metrics_legalbert.json` when done.
+4. Copy metrics to `artifacts/metrics_legalbert.json` and weights to `artifacts/legalbert-dca/`.
+5. Freeze the LLM slice (test contracts only): `PYTHONPATH=. python scripts/make_llm_testset.py`
 
 T4 settings in the notebook: `fp16`, batch 8, accum 4, `max_length=256`, 2 epochs.
 

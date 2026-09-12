@@ -7,7 +7,7 @@ export const dynamic = "force-dynamic";
 export default async function HomePage() {
   let meta: {
     ingest?: Record<string, unknown>;
-    metrics?: { test?: Record<string, unknown>; model?: string };
+    metrics?: { test?: Record<string, unknown>; model?: string; legalbert?: { test_f1?: number } };
     backend?: string;
   } | null = null;
   let error: string | null = null;
@@ -90,10 +90,14 @@ export default async function HomePage() {
           <div className="rounded-xl border border-[var(--line)] bg-white p-5">
             <h2 className="font-serif text-xl">Current backend</h2>
             <p className="mt-2 text-sm leading-6 text-[var(--muted)]">
-              Demo scorer: <code className="rounded bg-[var(--wash)] px-1">{meta?.backend || "offline"}</code>
-              . CPU TF–IDF logistic trained on CLAUSE pairs. Swap in Legal-BERT from the Colab T4
-              notebook when that checkpoint is ready. Test pair F1 {test.f1 ?? "—"}; recall{" "}
-              {test.recall ?? "—"}.
+              Live demo scorer:{" "}
+              <code className="rounded bg-[var(--wash)] px-1">{meta?.backend || "offline"}</code>
+              . CPU TF–IDF pair F1 {test.f1 != null ? Number(test.f1).toFixed(3) : "—"}. Legal-BERT
+              pair F1{" "}
+              {meta?.metrics?.legalbert?.test_f1 != null
+                ? Number(meta.metrics.legalbert.test_f1).toFixed(3)
+                : "—"}{" "}
+              (Colab T4). NVIDIA chat models are eval-only on the frozen document slice.
             </p>
           </div>
         </div>

@@ -2,33 +2,33 @@
   "model": "tfidf_logreg_pair",
   "dev": {
     "n": 4000,
-    "precision": 0.5174,
-    "recall": 0.7166,
-    "f1": 0.6009,
-    "type_macro_f1_on_gold_positives": 0.4179,
+    "precision": 0.405,
+    "recall": 0.7323,
+    "f1": 0.5216,
+    "type_macro_f1_on_gold_positives": 0.4264,
     "f1_by_gap_bin_gold_positives": {
-      "far": 0.92,
-      "nearby": 0.641,
-      "same_section": 0.7646,
-      "unknown": 0.8649
+      "far": 0.9095,
+      "nearby": 0.6877,
+      "same_section": 0.8157,
+      "unknown": 0.8889
     },
-    "mean_positive_score": 0.702,
-    "report": "              precision    recall  f1-score   support\n\n           0      0.892     0.779     0.832      3005\n           1      0.517     0.717     0.601       995\n\n    accuracy                          0.763      4000\n   macro avg      0.705     0.748     0.716      4000\nweighted avg      0.799     0.763     0.774      4000\n"
+    "mean_positive_score": 0.6415,
+    "report": "              precision    recall  f1-score   support\n\n           0      0.871     0.626     0.729      2969\n           1      0.405     0.732     0.522      1031\n\n    accuracy                          0.654      4000\n   macro avg      0.638     0.679     0.625      4000\nweighted avg      0.751     0.654     0.675      4000\n"
   },
   "test": {
     "n": 5000,
-    "precision": 0.4856,
-    "recall": 0.7141,
-    "f1": 0.5781,
-    "type_macro_f1_on_gold_positives": 0.4317,
+    "precision": 0.3729,
+    "recall": 0.6866,
+    "f1": 0.4833,
+    "type_macro_f1_on_gold_positives": 0.4056,
     "f1_by_gap_bin_gold_positives": {
-      "far": 0.9321,
-      "nearby": 0.6667,
-      "same_section": 0.7431,
-      "unknown": 0.888
+      "far": 0.9004,
+      "nearby": 0.6309,
+      "same_section": 0.7425,
+      "unknown": 0.8803
     },
-    "mean_positive_score": 0.6911,
-    "report": "              precision    recall  f1-score   support\n\n           0      0.890     0.753     0.816      3769\n           1      0.486     0.714     0.578      1231\n\n    accuracy                          0.743      5000\n   macro avg      0.688     0.734     0.697      5000\nweighted avg      0.790     0.743     0.757      5000\n"
+    "mean_positive_score": 0.6119,
+    "report": "              precision    recall  f1-score   support\n\n           0      0.858     0.621     0.721      3765\n           1      0.373     0.687     0.483      1235\n\n    accuracy                          0.637      5000\n   macro avg      0.615     0.654     0.602      5000\nweighted avg      0.738     0.637     0.662      5000\n"
   },
   "n_train": 28000
 }

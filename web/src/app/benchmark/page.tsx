@@ -3,19 +3,30 @@ import { fetchMeta } from "@/lib/api";
 
 export const dynamic = "force-dynamic";
 
+type PairTest = {
+  n?: number;
+  precision?: number;
+  recall?: number;
+  f1?: number;
+  type_macro_f1_on_gold_positives?: number | null;
+  f1_by_gap_bin_gold_positives?: Record<string, number>;
+};
+
+type LegalBert = {
+  model?: string;
+  test_precision?: number;
+  test_recall?: number;
+  test_f1?: number;
+  n_test?: number;
+  f1_by_gap_bin_gold_positives?: Record<string, number>;
+};
+
 export default async function BenchmarkPage() {
   let metrics: {
     model?: string;
     n_train?: number;
-    test?: {
-      n?: number;
-      precision?: number;
-      recall?: number;
-      f1?: number;
-      type_macro_f1_on_gold_positives?: number | null;
-      f1_by_gap_bin_gold_positives?: Record<string, number>;
-    };
-    legalbert?: Record<string, unknown>;
+    test?: PairTest;
+    legalbert?: LegalBert;
   } = {};
   let error: string | null = null;
   try {
@@ -26,7 +37,10 @@ export default async function BenchmarkPage() {
   }
 
   const test = metrics.test || {};
-  const bins = test.f1_by_gap_bin_gold_positives || {};
+  const lb = metrics.legalbert || {};
+  const tfidfBins = test.f1_by_gap_bin_gold_positives || {};
+  const bertBins = lb.f1_by_gap_bin_gold_positives || {};
+  const gapKeys = ["same_section", "nearby", "far", "unknown"];
 
   const rows = [
     {
@@ -35,31 +49,33 @@ export default async function BenchmarkPage() {
       precision: test.precision,
       recall: test.recall,
       typeF1: test.type_macro_f1_on_gold_positives,
-      notes: `${metrics.n_train ?? "—"} train pairs · CPU`,
+      notes: `${metrics.n_train ?? "—"} train pairs · CPU · n_test ${test.n ?? "—"}`,
     },
     {
-      name: "Legal-BERT single clause",
+      name: "Legal-BERT pair classifier (Colab T4)",
+      f1: lb.test_f1,
+      precision: lb.test_precision,
+      recall: lb.test_recall,
+      typeF1: "—",
+      notes: lb.test_f1
+        ? `${lb.model ?? "legal-bert"} · 2 epochs · n_test ${lb.n_test ?? "—"}`
+        : "Missing artifacts/metrics_legalbert.json",
+    },
+    {
+      name: "gpt-oss-120b (NVIDIA Build)",
       f1: "—",
       precision: "—",
       recall: "—",
       typeF1: "—",
-      notes: "Run notebooks/train_legalbert_colab.ipynb on T4, then paste metrics",
+      notes: "Document-level JSON on frozen llm_testset.jsonl — not yet run",
     },
     {
-      name: "Legal-BERT cross-encoder (Colab T4)",
+      name: "Nemotron / Qwen chat (NVIDIA Build)",
       f1: "—",
       precision: "—",
       recall: "—",
       typeF1: "—",
-      notes: "Upload artifacts/pairs_colab.jsonl.gz to Drive",
-    },
-    {
-      name: "Embedding kNN / RAG",
-      f1: "—",
-      precision: "—",
-      recall: "—",
-      typeF1: "—",
-      notes: "Same Colab notebook, cosine baseline cell can be added",
+      notes: "Same prompt and test docs as gpt-oss-120b",
     },
   ];
 
@@ -69,9 +85,10 @@ export default async function BenchmarkPage() {
       <main className="mx-auto max-w-6xl px-4 py-8">
         <h1 className="font-serif text-3xl">Benchmark</h1>
         <p className="mt-3 max-w-3xl text-sm leading-6 text-[var(--muted)]">
-          The paper table is pair F1 <strong>by document distance</strong> (same section / nearby /
-          far), not hop length. BCC gold is a two-span conflict. Legal-BERT numbers appear after the
-          T4 notebook finishes.
+          TF–IDF and Legal-BERT are <strong>pair classifiers</strong> (two spans in, conflict or
+          not). NVIDIA rows are a different job: list disagreeing pairs from the full truncated
+          contract. Gap F1 is the paper claim. Precision matters: dumping 40 guesses inflates
+          recall and still fails as a reviewer.
         </p>
         {error ? <p className="mt-4 text-sm text-[var(--accent)]">{error}</p> : null}
         <div className="mt-8 overflow-x-auto rounded-xl border border-[var(--line)] bg-white">
@@ -100,21 +117,42 @@ export default async function BenchmarkPage() {
             </tbody>
           </table>
         </div>
-        <h2 className="mt-10 font-serif text-2xl">Gold-positive recall by section gap</h2>
+        <h2 className="mt-10 font-serif text-2xl">Gold-positive F1 by section gap</h2>
         <p className="mt-2 text-sm text-[var(--muted)]">
-          Among labeled contradictions, how often the pair model still fires, binned by parsed
-          section numbers.
+          Nearby pairs are the harder bin. Legal-BERT and TF–IDF use the Colab/CPU pair test
+          slices, not the document LLM slice.
         </p>
-        <div className="mt-4 grid gap-3 sm:grid-cols-4">
-          {Object.entries(bins).map(([k, v]) => (
-            <div key={k} className="rounded-xl border border-[var(--line)] bg-white p-4">
-              <div className="text-xs uppercase text-[var(--muted)]">{k.replaceAll("_", " ")}</div>
-              <div className="mt-2 font-serif text-2xl">{typeof v === "number" ? v.toFixed(3) : v}</div>
-            </div>
-          ))}
-          {Object.keys(bins).length === 0 ? (
-            <div className="text-sm text-[var(--muted)]">No bin metrics loaded.</div>
-          ) : null}
+        <div className="mt-4 overflow-x-auto rounded-xl border border-[var(--line)] bg-white">
+          <table className="min-w-full text-left text-sm">
+            <thead className="border-b border-[var(--line)] text-xs uppercase tracking-wide text-[var(--muted)]">
+              <tr>
+                <th className="px-4 py-3">Model</th>
+                {gapKeys.map((k) => (
+                  <th key={k} className="px-4 py-3">
+                    {k.replaceAll("_", " ")}
+                  </th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              <tr className="border-b border-[var(--line)]">
+                <td className="px-4 py-3 font-medium">TF–IDF</td>
+                {gapKeys.map((k) => (
+                  <td key={k} className="px-4 py-3 font-mono">
+                    {fmt(tfidfBins[k])}
+                  </td>
+                ))}
+              </tr>
+              <tr>
+                <td className="px-4 py-3 font-medium">Legal-BERT</td>
+                {gapKeys.map((k) => (
+                  <td key={k} className="px-4 py-3 font-mono">
+                    {fmt(bertBins[k])}
+                  </td>
+                ))}
+              </tr>
+            </tbody>
+          </table>
         </div>
       </main>
     </div>

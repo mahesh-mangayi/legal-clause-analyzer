@@ -1,0 +1,10 @@
+{
+  "n_cuad_in_slice": 61,
+  "n_attached_full": 61,
+  "n_long_ge_20_pages": 18,
+  "long_chars_threshold": 60000,
+  "max_prompt_chars": 120000,
+  "out_full": "artifacts\\llm_testset_full.jsonl",
+  "out_long": "artifacts\\llm_testset_long.jsonl",
+  "note": "Same frozen contract_ids. Full CUAD text for NVIDIA; do not add unlabeled EDGAR."
+}

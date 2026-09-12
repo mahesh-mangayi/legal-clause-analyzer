@@ -1,0 +1,13 @@
+{
+  "model": "nlpaueb/legal-bert-base-uncased",
+  "test_precision": 0.8545362392295996,
+  "test_recall": 0.843,
+  "test_f1": 0.8487289202114271,
+  "f1_by_gap_bin_gold_positives": {
+    "nearby": 0.8076923076923077,
+    "same_section": 0.9316081330868762,
+    "far": 0.9344978165938864,
+    "unknown": 0.9417249417249417
+  },
+  "n_test": 4000
+}

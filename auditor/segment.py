@@ -81,7 +81,7 @@ REF_RE = re.compile(r"(?:Section|Clause|Article)\s+(\d+(?:\.\d+)*)", re.I)
 TERM_RE = re.compile(r"\b([A-Z][A-Za-z]{3,}(?:\s+[A-Z][A-Za-z]{3,}){0,3})\b")
 
 
-def candidate_pairs(clauses: list[Clause], max_pairs: int = 80) -> list[tuple[int, int, str]]:
+def candidate_pairs(clauses: list[Clause], max_pairs: int = 200) -> list[tuple[int, int, str]]:
     """Return (i, j, reason) pairs to score. Structure-guided, not all-pairs."""
     n = len(clauses)
     scored: dict[tuple[int, int], str] = {}
@@ -122,8 +122,12 @@ def candidate_pairs(clauses: list[Clause], max_pairs: int = 80) -> list[tuple[in
 
     # far pairs: first third vs last third
     if n >= 6:
-        for i in range(min(4, n // 3)):
-            add(i, n - 1 - i, "FAR")
+        far_n = min(12, max(4, n // 4))
+        for i in range(far_n):
+            add(i, n - 1 - (i % max(n // 3, 1)), "FAR")
+        mid = n // 2
+        for i in range(min(6, n // 5 or 1)):
+            add(i, min(mid + i, n - 1), "FAR")
 
     pairs = [(a, b, reason) for (a, b), reason in scored.items()]
     pairs.sort(key=lambda x: (x[0], x[1]))

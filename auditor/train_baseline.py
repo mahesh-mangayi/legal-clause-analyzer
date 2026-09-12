@@ -37,16 +37,17 @@ def _f1_by_bin(y_true, y_pred, bins: list[str]) -> dict[str, float]:
     return out
 
 
-def train_baseline(pairs_path: Path, out_dir: Path) -> dict:
+def train_baseline(pairs_path: Path, out_dir: Path, train_cap: int = 28000) -> dict:
     rows = load_jsonl(pairs_path)
     train = [r for r in rows if r["split"] == "train"]
     dev = [r for r in rows if r["split"] == "dev"]
     test = [r for r in rows if r["split"] == "test"]
     # CPU-friendly cap; Colab uses the full / subset jsonl with Legal-BERT
-    if len(train) > 28000:
+    if train_cap and len(train) > train_cap:
         pos = [r for r in train if r["label"] == 1]
         neg = [r for r in train if r["label"] == 0]
-        train = pos[:14000] + neg[:14000]
+        half = train_cap // 2
+        train = pos[:half] + neg[: train_cap - min(half, len(pos))]
     if len(dev) > 4000:
         dev = dev[:4000]
     if len(test) > 5000:
