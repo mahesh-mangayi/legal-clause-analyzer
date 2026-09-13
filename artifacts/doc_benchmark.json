@@ -2,11 +2,11 @@
   "auditor": {
     "summary": {
       "n_docs": 18,
-      "precision": 0.0016420361247947454,
+      "precision": 0.001644736842105263,
       "recall": 0.0037735849056603774,
-      "f1": 0.002288329519450801,
+      "f1": 0.002290950744558992,
       "tp": 1,
-      "fp": 608,
+      "fp": 607,
       "fn": 264,
       "recall_by_gap": {
         "far": 0.008849557522123894,
@@ -15,7 +15,6 @@
         "unknown": 0.0
       },
       "backend": "legalbert",
-      "threshold": 0.55,
       "jaccard": 0.5
     },
     "per_doc": [
@@ -128,7 +127,7 @@
         },
         "contract_id": "Array BioPharma Inc. - LICENSE, DEVELOPMENT AND COMMERCIALIZATION AGREEMENT.txt",
         "n_clauses": 33,
-        "n_candidates": 115
+        "n_candidates": 117
       },
       {
         "tp": 0,
@@ -276,7 +275,7 @@
         },
         "contract_id": "ELANDIAINTERNATIONALINC_04_25_2007-EX-10.21-Outsourcing Agreement.txt",
         "n_clauses": 53,
-        "n_candidates": 138
+        "n_candidates": 139
       },
       {
         "tp": 0,
@@ -313,7 +312,7 @@
         },
         "contract_id": "EhaveInc_20190515_20-F_EX-4.44_11678816_EX-4.44_License Agreement_ Reseller Agreement.txt",
         "n_clauses": 32,
-        "n_candidates": 100
+        "n_candidates": 103
       },
       {
         "tp": 0,
@@ -387,16 +386,16 @@
         },
         "contract_id": "HEMISPHERX - Sales, Marketing, Distribution, and Supply Agreement.txt",
         "n_clauses": 69,
-        "n_candidates": 177
+        "n_candidates": 176
       },
       {
         "tp": 0,
-        "fp": 17,
+        "fp": 16,
         "fn": 14,
         "precision": 0.0,
         "recall": 0.0,
         "f1": 0.0,
-        "n_pred": 17,
+        "n_pred": 16,
         "n_gold": 14,
         "recall_by_gap": {
           "same_section": 0.0,
@@ -424,7 +423,7 @@
         },
         "contract_id": "MOELIS_CO_03_24_2014-EX-10.19-STRATEGIC ALLIANCE AGREEMENT.txt",
         "n_clauses": 15,
-        "n_candidates": 47
+        "n_candidates": 49
       },
       {
         "tp": 0,
@@ -498,7 +497,7 @@
         },
         "contract_id": "NUVEEN - REMARKETING AGREEMENT.txt",
         "n_clauses": 36,
-        "n_candidates": 141
+        "n_candidates": 140
       },
       {
         "tp": 0,
@@ -609,7 +608,7 @@
         },
         "contract_id": "SoupmanInc_20150814_8-K_EX-10.1_9230148_EX-10.1_Franchise Agreement1.txt",
         "n_clauses": 59,
-        "n_candidates": 158
+        "n_candidates": 155
       },
       {
         "tp": 0,
@@ -683,7 +682,658 @@
         },
         "contract_id": "ZEBRATECHNOLOGIESCORP_04_16_2014-EX-10.1-INTELLECTUAL PROPERTY AGREEMENT.txt",
         "n_clauses": 31,
-        "n_candidates": 106
+        "n_candidates": 112
+      }
+    ]
+  },
+  "nvidia": {
+    "summary": {
+      "n_docs": 18,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "tp": 0,
+      "fp": 0,
+      "fn": 265,
+      "recall_by_gap": {
+        "far": 0.0,
+        "nearby": 0.0,
+        "same_section": 0.0,
+        "unknown": 0.0
+      },
+      "backend": "deepseek-ai/deepseek-v4-pro-0813",
+      "jaccard": 0.5
+    },
+    "per_doc": [
+      {
+        "tp": 0,
+        "fp": 0,
+        "fn": 18,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "n_pred": 0,
+        "n_gold": 18,
+        "recall_by_gap": {
+          "same_section": 0.0,
+          "nearby": 0.0,
+          "far": 0.0,
+          "unknown": 0.0
+        },
+        "gap_counts": {
+          "same_section": {
+            "tp": 0,
+            "fn": 7
+          },
+          "nearby": {
+            "tp": 0,
+            "fn": 4
+          },
+          "far": {
+            "tp": 0,
+            "fn": 4
+          },
+          "unknown": {
+            "tp": 0,
+            "fn": 3
+          }
+        },
+        "contract_id": "AIRTECHINTERNATIONALGROUPINC_05_08_2000-EX-10.4-FRANCHISE AGREEMENT.txt"
+      },
+      {
+        "tp": 0,
+        "fp": 0,
+        "fn": 14,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "n_pred": 0,
+        "n_gold": 14,
+        "recall_by_gap": {
+          "same_section": 0.0,
+          "nearby": 0.0,
+          "far": 0.0,
+          "unknown": 0.0
+        },
+        "gap_counts": {
+          "same_section": {
+            "tp": 0,
+            "fn": 5
+          },
+          "nearby": {
+            "tp": 0,
+            "fn": 1
+          },
+          "far": {
+            "tp": 0,
+            "fn": 8
+          },
+          "unknown": {
+            "tp": 0,
+            "fn": 0
+          }
+        },
+        "contract_id": "ATHENSBANCSHARESCORP_11_02_2009-EX-1.2-AGENCY AGREEMENT , 2009.txt"
+      },
+      {
+        "tp": 0,
+        "fp": 0,
+        "fn": 17,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "n_pred": 0,
+        "n_gold": 17,
+        "recall_by_gap": {
+          "same_section": 0.0,
+          "nearby": 0.0,
+          "far": 0.0,
+          "unknown": 0.0
+        },
+        "gap_counts": {
+          "same_section": {
+            "tp": 0,
+            "fn": 3
+          },
+          "nearby": {
+            "tp": 0,
+            "fn": 4
+          },
+          "far": {
+            "tp": 0,
+            "fn": 10
+          },
+          "unknown": {
+            "tp": 0,
+            "fn": 0
+          }
+        },
+        "contract_id": "Array BioPharma Inc. - LICENSE, DEVELOPMENT AND COMMERCIALIZATION AGREEMENT.txt"
+      },
+      {
+        "tp": 0,
+        "fp": 0,
+        "fn": 17,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "n_pred": 0,
+        "n_gold": 17,
+        "recall_by_gap": {
+          "same_section": 0.0,
+          "nearby": 0.0,
+          "far": 0.0,
+          "unknown": 0.0
+        },
+        "gap_counts": {
+          "same_section": {
+            "tp": 0,
+            "fn": 3
+          },
+          "nearby": {
+            "tp": 0,
+            "fn": 4
+          },
+          "far": {
+            "tp": 0,
+            "fn": 9
+          },
+          "unknown": {
+            "tp": 0,
+            "fn": 1
+          }
+        },
+        "contract_id": "BIOFRONTERAAG_04_29_2019-EX-4.17-SUPPLY AGREEMENT.txt"
+      },
+      {
+        "tp": 0,
+        "fp": 0,
+        "fn": 19,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "n_pred": 0,
+        "n_gold": 19,
+        "recall_by_gap": {
+          "same_section": 0.0,
+          "nearby": 0.0,
+          "far": 0.0,
+          "unknown": 0.0
+        },
+        "gap_counts": {
+          "same_section": {
+            "tp": 0,
+            "fn": 0
+          },
+          "nearby": {
+            "tp": 0,
+            "fn": 0
+          },
+          "far": {
+            "tp": 0,
+            "fn": 0
+          },
+          "unknown": {
+            "tp": 0,
+            "fn": 19
+          }
+        },
+        "contract_id": "BUFFALOWILDWINGSINC_06_05_1998-EX-10.3-FRANCHISE AGREEMENT.txt"
+      },
+      {
+        "tp": 0,
+        "fp": 0,
+        "fn": 7,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "n_pred": 0,
+        "n_gold": 7,
+        "recall_by_gap": {
+          "same_section": 0.0,
+          "nearby": 0.0,
+          "far": 0.0,
+          "unknown": 0.0
+        },
+        "gap_counts": {
+          "same_section": {
+            "tp": 0,
+            "fn": 3
+          },
+          "nearby": {
+            "tp": 0,
+            "fn": 1
+          },
+          "far": {
+            "tp": 0,
+            "fn": 0
+          },
+          "unknown": {
+            "tp": 0,
+            "fn": 3
+          }
+        },
+        "contract_id": "CardlyticsInc_20180112_S-1_EX-10.16_11002987_EX-10.16_Maintenance Agreement3.txt"
+      },
+      {
+        "tp": 0,
+        "fp": 0,
+        "fn": 11,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "n_pred": 0,
+        "n_gold": 11,
+        "recall_by_gap": {
+          "same_section": 0.0,
+          "nearby": 0.0,
+          "far": 0.0,
+          "unknown": 0.0
+        },
+        "gap_counts": {
+          "same_section": {
+            "tp": 0,
+            "fn": 2
+          },
+          "nearby": {
+            "tp": 0,
+            "fn": 0
+          },
+          "far": {
+            "tp": 0,
+            "fn": 5
+          },
+          "unknown": {
+            "tp": 0,
+            "fn": 4
+          }
+        },
+        "contract_id": "ELANDIAINTERNATIONALINC_04_25_2007-EX-10.21-Outsourcing Agreement.txt"
+      },
+      {
+        "tp": 0,
+        "fp": 0,
+        "fn": 15,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "n_pred": 0,
+        "n_gold": 15,
+        "recall_by_gap": {
+          "same_section": 0.0,
+          "nearby": 0.0,
+          "far": 0.0,
+          "unknown": 0.0
+        },
+        "gap_counts": {
+          "same_section": {
+            "tp": 0,
+            "fn": 3
+          },
+          "nearby": {
+            "tp": 0,
+            "fn": 3
+          },
+          "far": {
+            "tp": 0,
+            "fn": 8
+          },
+          "unknown": {
+            "tp": 0,
+            "fn": 1
+          }
+        },
+        "contract_id": "EhaveInc_20190515_20-F_EX-4.44_11678816_EX-4.44_License Agreement_ Reseller Agreement.txt"
+      },
+      {
+        "tp": 0,
+        "fp": 0,
+        "fn": 14,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "n_pred": 0,
+        "n_gold": 14,
+        "recall_by_gap": {
+          "same_section": 0.0,
+          "nearby": 0.0,
+          "far": 0.0,
+          "unknown": 0.0
+        },
+        "gap_counts": {
+          "same_section": {
+            "tp": 0,
+            "fn": 3
+          },
+          "nearby": {
+            "tp": 0,
+            "fn": 4
+          },
+          "far": {
+            "tp": 0,
+            "fn": 7
+          },
+          "unknown": {
+            "tp": 0,
+            "fn": 0
+          }
+        },
+        "contract_id": "ExactSciencesCorp_20180822_8-K_EX-10.1_11331629_EX-10.1_Promotion Agreement.txt"
+      },
+      {
+        "tp": 0,
+        "fp": 0,
+        "fn": 13,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "n_pred": 0,
+        "n_gold": 13,
+        "recall_by_gap": {
+          "same_section": 0.0,
+          "nearby": 0.0,
+          "far": 0.0,
+          "unknown": 0.0
+        },
+        "gap_counts": {
+          "same_section": {
+            "tp": 0,
+            "fn": 0
+          },
+          "nearby": {
+            "tp": 0,
+            "fn": 0
+          },
+          "far": {
+            "tp": 0,
+            "fn": 0
+          },
+          "unknown": {
+            "tp": 0,
+            "fn": 13
+          }
+        },
+        "contract_id": "HEMISPHERX - Sales, Marketing, Distribution, and Supply Agreement.txt"
+      },
+      {
+        "tp": 0,
+        "fp": 0,
+        "fn": 14,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "n_pred": 0,
+        "n_gold": 14,
+        "recall_by_gap": {
+          "same_section": 0.0,
+          "nearby": 0.0,
+          "far": 0.0,
+          "unknown": 0.0
+        },
+        "gap_counts": {
+          "same_section": {
+            "tp": 0,
+            "fn": 3
+          },
+          "nearby": {
+            "tp": 0,
+            "fn": 2
+          },
+          "far": {
+            "tp": 0,
+            "fn": 8
+          },
+          "unknown": {
+            "tp": 0,
+            "fn": 1
+          }
+        },
+        "contract_id": "MOELIS_CO_03_24_2014-EX-10.19-STRATEGIC ALLIANCE AGREEMENT.txt"
+      },
+      {
+        "tp": 0,
+        "fp": 0,
+        "fn": 16,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "n_pred": 0,
+        "n_gold": 16,
+        "recall_by_gap": {
+          "same_section": 0.0,
+          "nearby": 0.0,
+          "far": 0.0,
+          "unknown": 0.0
+        },
+        "gap_counts": {
+          "same_section": {
+            "tp": 0,
+            "fn": 7
+          },
+          "nearby": {
+            "tp": 0,
+            "fn": 1
+          },
+          "far": {
+            "tp": 0,
+            "fn": 6
+          },
+          "unknown": {
+            "tp": 0,
+            "fn": 2
+          }
+        },
+        "contract_id": "NICELTD_06_26_2003-EX-4.5-OUTSOURCING AGREEMENT.txt"
+      },
+      {
+        "tp": 0,
+        "fp": 0,
+        "fn": 18,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "n_pred": 0,
+        "n_gold": 18,
+        "recall_by_gap": {
+          "same_section": 0.0,
+          "nearby": 0.0,
+          "far": 0.0,
+          "unknown": 0.0
+        },
+        "gap_counts": {
+          "same_section": {
+            "tp": 0,
+            "fn": 4
+          },
+          "nearby": {
+            "tp": 0,
+            "fn": 4
+          },
+          "far": {
+            "tp": 0,
+            "fn": 10
+          },
+          "unknown": {
+            "tp": 0,
+            "fn": 0
+          }
+        },
+        "contract_id": "NUVEEN - REMARKETING AGREEMENT.txt"
+      },
+      {
+        "tp": 0,
+        "fp": 0,
+        "fn": 11,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "n_pred": 0,
+        "n_gold": 11,
+        "recall_by_gap": {
+          "same_section": 0.0,
+          "nearby": 0.0,
+          "far": 0.0,
+          "unknown": 0.0
+        },
+        "gap_counts": {
+          "same_section": {
+            "tp": 0,
+            "fn": 3
+          },
+          "nearby": {
+            "tp": 0,
+            "fn": 2
+          },
+          "far": {
+            "tp": 0,
+            "fn": 4
+          },
+          "unknown": {
+            "tp": 0,
+            "fn": 2
+          }
+        },
+        "contract_id": "OFGBANCORP_03_28_2007-EX-10.23-OUTSOURCING AGREEMENT.txt"
+      },
+      {
+        "tp": 0,
+        "fp": 0,
+        "fn": 16,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "n_pred": 0,
+        "n_gold": 16,
+        "recall_by_gap": {
+          "same_section": 0.0,
+          "nearby": 0.0,
+          "far": 0.0,
+          "unknown": 0.0
+        },
+        "gap_counts": {
+          "same_section": {
+            "tp": 0,
+            "fn": 7
+          },
+          "nearby": {
+            "tp": 0,
+            "fn": 0
+          },
+          "far": {
+            "tp": 0,
+            "fn": 9
+          },
+          "unknown": {
+            "tp": 0,
+            "fn": 0
+          }
+        },
+        "contract_id": "ParatekPharmaceuticalsInc_20170505_10-KA_EX-10.29_10323872_EX-10.29_Outsourcing Agreement.txt"
+      },
+      {
+        "tp": 0,
+        "fp": 0,
+        "fn": 13,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "n_pred": 0,
+        "n_gold": 13,
+        "recall_by_gap": {
+          "same_section": 0.0,
+          "nearby": 0.0,
+          "far": 0.0,
+          "unknown": 0.0
+        },
+        "gap_counts": {
+          "same_section": {
+            "tp": 0,
+            "fn": 6
+          },
+          "nearby": {
+            "tp": 0,
+            "fn": 0
+          },
+          "far": {
+            "tp": 0,
+            "fn": 7
+          },
+          "unknown": {
+            "tp": 0,
+            "fn": 0
+          }
+        },
+        "contract_id": "SoupmanInc_20150814_8-K_EX-10.1_9230148_EX-10.1_Franchise Agreement1.txt"
+      },
+      {
+        "tp": 0,
+        "fp": 0,
+        "fn": 16,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "n_pred": 0,
+        "n_gold": 16,
+        "recall_by_gap": {
+          "same_section": 0.0,
+          "nearby": 0.0,
+          "far": 0.0,
+          "unknown": 0.0
+        },
+        "gap_counts": {
+          "same_section": {
+            "tp": 0,
+            "fn": 1
+          },
+          "nearby": {
+            "tp": 0,
+            "fn": 5
+          },
+          "far": {
+            "tp": 0,
+            "fn": 10
+          },
+          "unknown": {
+            "tp": 0,
+            "fn": 0
+          }
+        },
+        "contract_id": "VERICELCORP_08_06_2019-EX-10.10-SUPPLY AGREEMENT.txt"
+      },
+      {
+        "tp": 0,
+        "fp": 0,
+        "fn": 16,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "n_pred": 0,
+        "n_gold": 16,
+        "recall_by_gap": {
+          "same_section": 0.0,
+          "nearby": 0.0,
+          "far": 0.0,
+          "unknown": 0.0
+        },
+        "gap_counts": {
+          "same_section": {
+            "tp": 0,
+            "fn": 4
+          },
+          "nearby": {
+            "tp": 0,
+            "fn": 4
+          },
+          "far": {
+            "tp": 0,
+            "fn": 8
+          },
+          "unknown": {
+            "tp": 0,
+            "fn": 0
+          }
+        },
+        "contract_id": "ZEBRATECHNOLOGIESCORP_04_16_2014-EX-10.1-INTELLECTUAL PROPERTY AGREEMENT.txt"
       }
     ]
   }
