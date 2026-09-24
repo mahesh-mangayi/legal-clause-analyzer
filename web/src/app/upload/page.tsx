@@ -137,8 +137,8 @@ export default function UploadPage() {
 
           <button
             type="button"
-            onClick={run}
-            disabled={running || text.trim().length < 10}
+            onClick={() => { alert("BUTTON WORKS"); run(); }}
+            disabled={false}
             className="mt-4 rounded-full bg-[var(--ink)] px-5 py-2.5 text-sm text-[var(--paper)] disabled:opacity-50 hover:opacity-90 transition-opacity"
           >
             {running ? "Running pipeline…" : done ? "✓ Done — redirecting…" : "Run auditor"}
